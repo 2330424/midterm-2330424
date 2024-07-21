@@ -22,8 +22,17 @@ export default function Root({ children }: PropsWithChildren) {
         {/* Using raw CSS styles as an escape-hatch to ensure the background color never flickers in dark-mode. */}
         <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
         {/* Add any additional <head> elements that you want globally available on web... */}
+        <style>{styles}</style>
       </head>
-      <body>{children}</body>
+      <body>
+        <nav className="navigation">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/new-tab"><i className="icon-new-tab"></i> New Tab</a></li>
+          </ul>
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }
@@ -37,3 +46,29 @@ body {
     background-color: #000;
   }
 }`;
+
+const styles = `
+.navigation {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+.navigation ul {
+  list-style: none;
+  padding: 0;
+}
+.navigation ul li {
+  display: inline;
+  margin-right: 15px;
+}
+.navigation ul li a {
+  text-decoration: none;
+  color: #333;
+}
+.navigation ul li a:hover {
+  color: #007bff;
+}
+.icon-new-tab::before {
+  content: '\\1F4C3'; 
+  margin-right: 5px;
+}
+`;
